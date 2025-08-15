@@ -1,9 +1,12 @@
 # MiniUltiMaxConsole
 
-Console with streamlined connection workflow and automation
+> Console with streamlined connection workflow and automation
 
 ## Features
 
+- **Backend API**: Flask-based REST API that proxies requests to real game server endpoints
+- **Live Data**: All endpoints fetch real live data from game servers (no sample data)
+- **Proxy Architecture**: Secure proxy layer for game server communication
 - **Cross-Server Message Form**: Send messages across multiple servers and to specific players
 - **Cross-Server Command Form**: Execute commands on multiple servers with live data fetching
 - **Live Data Integration**: All server, player, and command data is fetched dynamically from the Flask backend
@@ -35,18 +38,28 @@ cd backend
 pip install -r requirements.txt
 ```
 
-2. Run the Flask server:
+2. Configure your game server:
+```bash
+cp .env.example .env
+# Edit .env with your game server details
+```
+
+3. Run the Flask server:
 ```bash
 python app.py
 ```
 
-The backend will run on `http://localhost:5000` with the following API endpoints:
-- `GET /api/servers` - Get list of servers
-- `GET /api/players` - Get list of players  
-- `GET /api/commands` - Get list of available commands
-- `GET /api/players/<server_id>` - Get players for a specific server
+The backend will run on `http://localhost:5000` with these API endpoints:
+- `GET /api/servers` - List all game servers
+- `GET /api/servers/<id>` - Get specific server details
+- `GET /api/players` - List players  
+- `GET /api/players/<id>` - Get specific player details
+- `GET /api/commands` - List available commands
+- `GET /api/commands/<id>` - Get specific command details
+- `POST /api/commands` - Execute commands
 - `POST /api/send-message` - Send cross-server message
 - `POST /api/execute-command` - Execute command on servers
+- `GET /health` - Health check
 
 ### Frontend (React UI)
 
